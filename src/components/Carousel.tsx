@@ -1,6 +1,7 @@
 import { useGSAP } from "@gsap/react";
 import { slides } from "../constants";
 import { useState } from "react";
+import gsap from "gsap";
 
 const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
@@ -15,23 +16,13 @@ const Carousel = () => {
     setCurrentSlide((prev: number) => (prev + 1) % (slides.length - 1));
   };
   useGSAP(() => {
-    gsap.to(".slider-item", {
+    const tl = gsap.timeline();
+
+    tl.to(".slider-item", {
       x: `-${currentSlide * 63}vw`,
-      opacity: 1,
-      duration: 1.2,
-      ease: "expo.out",
+      duration: 1,
+      ease: "power2.inOut",
     });
-    gsap.fromTo(
-      `.slider-item:nth-child(${currentSlide + 2})`,
-      {
-        scale: 2,
-      },
-      {
-        scale: 1,
-        duration: 1,
-        ease: "power2.out",
-      },
-    );
   }, [currentSlide]);
   return (
     <div className="relative">
