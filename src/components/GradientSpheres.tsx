@@ -7,8 +7,8 @@ const GradientSpheres = ({
 }) => {
   return (
     <>
-      <div className={` ${sphere1Class}`}></div>
-      <div className={` ${sphere2Class}`}></div>
+      <div className={sphere1Class}></div>
+      <div className={sphere2Class}></div>
     </>
   );
 };

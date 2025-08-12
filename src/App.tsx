@@ -1,5 +1,6 @@
 import Hero from "./components/Hero";
 import About from "./sections/About";
+import Project from "./sections/Project";
 import TechStack from "./sections/TechStack";
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
       <Hero />
       <About />
       <TechStack />
+      <Project />
     </>
   );
 }
