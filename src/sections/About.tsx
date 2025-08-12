@@ -21,7 +21,7 @@ const About = () => {
       scrollTrigger: {
         trigger: "#about",
         start: "top top",
-        toggleActions: "restart none none none",
+        toggleActions: "restart none restart none",
       },
     });
     //text animation
@@ -34,7 +34,7 @@ const About = () => {
       scrollTrigger: {
         trigger: "#about",
         start: "top top",
-        toggleActions: "restart none none none",
+        toggleActions: "restart none restart none",
       },
     });
   }, []);
