@@ -6,12 +6,40 @@ import TitleHeader from "../components/TitleHeader";
 import Alien from "../models/Alien";
 import { OrbitControls } from "@react-three/drei";
 import { bentoSocialLinks } from "../constants";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 const About = () => {
+  useGSAP(() => {
+    gsap.from("#card", {
+      opacity: 0,
+      y: 50,
+      stagger: 0.3,
+      duration: 1,
+      ease: "power3.inOut",
+      scrollTrigger: {
+        trigger: "#about",
+        start: "top top",
+        toggleActions: "restart none none none",
+      },
+    });
+    //text animation
+    gsap.from(".animated-text", {
+      opacity: 0,
+      y: 20,
+      stagger: 0.15,
+      duration: 0.6,
+      ease: "power3.inOut",
+      scrollTrigger: {
+        trigger: "#about",
+        start: "top top",
+        toggleActions: "restart none none none",
+      },
+    });
+  }, []);
   return (
-    <section
-      id="about"
-      className="flex-center relative border border-red-500 px-5 md:p-0"
-    >
+    <section id="about" className="flex-center relative px-5 md:p-0">
       <GradientSpheres
         sphere1Class={"about-gradient-sphere about-sphere-1"}
         sphere2Class={"about-gradient-sphere about-sphere-2"}
@@ -34,10 +62,10 @@ const About = () => {
                   />
                 </div>
                 <div className="mt-5">
-                  <h1 className="text-3xl text-blue-50 md:text-5xl">
+                  <h1 className="animated-text text-3xl text-blue-50 md:text-5xl">
                     David Jhonson
                   </h1>
-                  <p className="mt-2 md:text-2xl">
+                  <p className="animated-text mt-2 md:text-2xl">
                     I am a San francisco-based product designer with a focus on
                     web design, illustration, a visual development. I have a
                     diverse range of experience having worked across various
@@ -60,33 +88,33 @@ const About = () => {
                 </div>
               </div>
             </div>
-            <div className="col-span-12 row-span-3 md:col-span-6">
+            <div id="card" className="col-span-12 row-span-3 md:col-span-6">
               <div className="h-full w-full rounded-2xl bg-black-300 p-7">
                 <div className="flex h-full flex-col justify-center gap-2">
-                  <h1 className="gradient-title text-2xl font-medium md:text-3xl">
+                  <h1 className="gradient-title animated-text text-2xl font-medium md:text-3xl">
                     FullStack Developer
                   </h1>
-                  <p className="max-w-96 md:text-2xl">
+                  <p className="animated-text max-w-96 md:text-2xl">
                     Cleanly Designed, Conversion-focused, and build for easy
                     updates.
                   </p>
                 </div>
               </div>
             </div>
-            <div className="col-span-12 row-span-3 md:col-span-6">
+            <div id="card" className="col-span-12 row-span-3 md:col-span-6">
               <div className="h-full w-full rounded-2xl bg-black-300 p-7">
                 <div className="flex h-full flex-col justify-center gap-2">
-                  <h1 className="gradient-title text-2xl font-medium md:text-3xl">
+                  <h1 className="gradient-title animated-text text-2xl font-medium md:text-3xl">
                     Web Design & Dev
                   </h1>
-                  <p className="max-w-96 md:text-2xl">
+                  <p className="animated-text max-w-96 md:text-2xl">
                     Cleanly Designed, Conversion-focused, and build for easy
                     updates.
                   </p>
                 </div>
               </div>
             </div>
-            <div className="col-span-12 row-span-4 md:col-span-4">
+            <div id="card" className="col-span-12 row-span-4 md:col-span-4">
               <div className="h-full w-full rounded-2xl bg-black-300 p-7">
                 <div className="flex h-full flex-col justify-center gap-2">
                   {["BE YOURSELF", "BE DIFFERENT!", "BUILD DIFFERENT!"].map(
@@ -113,7 +141,7 @@ const About = () => {
                         {item.name}
                       </h1>
                     </div>
-                    <div className="transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 md:hidden">
+                    <div className="transition-transform group-hover:translate-x-2 group-hover:-translate-y-2">
                       <img
                         src="/images/arrowupright.svg"
                         alt="arrow-up"

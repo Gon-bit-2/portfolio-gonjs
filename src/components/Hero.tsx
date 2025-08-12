@@ -2,10 +2,7 @@ import GradientSpheres from "./GradientSpheres";
 
 const Hero = () => {
   return (
-    <section
-      id="home"
-      className="relative h-dvh border border-red-500 px-5 text-white-50 md:p-0"
-    >
+    <section id="home" className="relative h-dvh px-5 text-white-50 md:p-0">
       <GradientSpheres
         sphere1Class={"gradient-sphere sphere-1"}
         sphere2Class={"gradient-sphere sphere-2"}
