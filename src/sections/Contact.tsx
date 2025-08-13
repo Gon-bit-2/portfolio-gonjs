@@ -22,7 +22,7 @@ const Contact = () => {
               <ContactForm />
             </div>
             <div className="col-span-12 md:col-span-7">
-              <div className="-mt-32 h-full w-full md:m-0">
+              <div className="top-0 left-0 -mt-32 h-96 w-full md:absolute md:left-96 md:m-0 md:h-full">
                 <ContactExperience />
               </div>
             </div>

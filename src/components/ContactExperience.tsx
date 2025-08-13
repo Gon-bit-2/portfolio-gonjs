@@ -25,7 +25,7 @@ const ContactExperience = () => {
           bevelEnabled
         >
           {`Hello`}
-          <meshStandardMaterial />
+          <meshStandardMaterial color="#1c34ff" />
         </Text3D>
         <ContactBoy scale={2.5} position={[0, -3, 0]} />
       </group>

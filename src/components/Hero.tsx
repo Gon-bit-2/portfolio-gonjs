@@ -1,4 +1,5 @@
 import GradientSpheres from "./GradientSpheres";
+import HeroExperience from "./HeroExperience";
 
 const Hero = () => {
   return (
@@ -33,6 +34,9 @@ const Hero = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="absolute inset-0 h-full w-full">
+        <HeroExperience />
       </div>
     </section>
   );
