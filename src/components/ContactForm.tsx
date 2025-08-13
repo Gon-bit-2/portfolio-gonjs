@@ -1,7 +1,50 @@
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
+type TData = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
 const ContactForm = () => {
+  const initialValues: TData = {
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  };
+  const contactValidator = z.object({
+    name: z.string().min(2).nonempty("Name is required"),
+    email: z
+      .string()
+      .nonempty("Email is required")
+      .email("Invalid email address"),
+    subject: z.string().nonempty("Subject is required"),
+    message: z.string().nonempty("Message is required"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: initialValues,
+    resolver: zodResolver(contactValidator),
+  });
+  const onSubmit = async (data: TData) => {
+    console.log(data);
+  };
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
   return (
     <div className="flex-center">
-      <form className="flex w-full flex-col gap-7 text-[#a7a7a7]">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex w-full flex-col gap-7 text-[#a7a7a7]"
+      >
         <div>
           <label
             htmlFor="name"
@@ -10,11 +53,15 @@ const ContactForm = () => {
             Name
           </label>
           <input
+            {...register("name")}
             type="text"
             id="name"
             placeholder="Enter your name"
             className="w-full rounded-md bg-black-300 px-4 py-4 text-sm font-light placeholder:text-[#fafafa50] md:text-base"
           />
+          {errors.name && (
+            <span className="text-red-500">{errors.name.message}</span>
+          )}
         </div>
         <div className="flex w-full flex-col gap-7 text-[#a7a7a7]">
           <label
@@ -24,11 +71,15 @@ const ContactForm = () => {
             Email address
           </label>
           <input
+            {...register("email")}
             type="text"
             id="email"
-            placeholder="Enter your name"
+            placeholder="Enter your email"
             className="w-full rounded-md bg-black-300 px-4 py-4 text-sm font-light placeholder:text-[#fafafa50] md:text-base"
           />
+          {errors.email && (
+            <span className="text-red-500">{errors.email.message}</span>
+          )}
         </div>
         <div className="flex w-full flex-col gap-7 text-[#a7a7a7]">
           <label
@@ -38,11 +89,15 @@ const ContactForm = () => {
             Subject
           </label>
           <input
+            {...register("subject")}
             type="text"
             id="subject"
-            placeholder="Enter your name"
+            placeholder="Enter your subject"
             className="w-full rounded-md bg-black-300 px-4 py-4 text-sm font-light placeholder:text-[#fafafa50] md:text-base"
           />
+          {errors.subject && (
+            <span className="text-red-500">{errors.subject.message}</span>
+          )}
         </div>
         <div className="flex w-full flex-col gap-7 text-[#a7a7a7]">
           <label
@@ -52,11 +107,15 @@ const ContactForm = () => {
             Message
           </label>
           <textarea
+            {...register("message")}
             id="message"
             placeholder="Enter your message"
             rows={5}
             className="w-full rounded-md bg-black-300 px-4 py-4 text-sm font-light placeholder:text-[#fafafa50] md:text-base"
           />
+          {errors.message && (
+            <span className="text-red-500">{errors.message.message}</span>
+          )}
         </div>
         <button
           type="submit"
