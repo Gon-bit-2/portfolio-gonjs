@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import emailjs from "@emailjs/browser";
 type TData = {
   name: string;
   email: string;
@@ -9,6 +10,7 @@ type TData = {
   message: string;
 };
 const ContactForm = () => {
+  const [loading, setLoading] = useState(false);
   const initialValues: TData = {
     name: "",
     email: "",
@@ -29,12 +31,38 @@ const ContactForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     defaultValues: initialValues,
     resolver: zodResolver(contactValidator),
   });
   const onSubmit = async (data: TData) => {
-    console.log(data);
+    setLoading(true);
+    try {
+      const payload = {
+        name: data.name,
+        to_name: "Full Stack Developer",
+        message: data.message,
+        email: data.email,
+        title: data.subject,
+        time: new Date().toLocaleString(),
+      };
+
+      const serviceID = import.meta.env.VITE_EMAIL_SERVICE_ID;
+      const templateID = import.meta.env.VITE_EMAIL_TEMPLATE_ID;
+      const userID = import.meta.env.VITE_EMAIL_PUBLIC_KEY;
+
+      await emailjs.send(serviceID, templateID, payload, {
+        publicKey: userID,
+      });
+    } catch (error) {
+      console.log("FAILED...", error);
+      alert("Failed to send message, please try again.");
+    } finally {
+      setLoading(false);
+      reset(initialValues);
+      alert("Message sent successfully!");
+    }
   };
   useEffect(() => {
     console.log(errors);
@@ -121,7 +149,7 @@ const ContactForm = () => {
           type="submit"
           className="mt-4 rounded-md bg-blue-50 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-blue-600 md:text-base"
         >
-          Send Message
+          {loading ? "Sending..." : "Send Message"}
         </button>
       </form>
     </div>

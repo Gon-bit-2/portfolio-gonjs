@@ -1,3 +1,4 @@
+import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import About from "./sections/About";
 import Contact from "./sections/Contact";
@@ -14,6 +15,7 @@ function App() {
       <Project />
       <Testimonials />
       <Contact />
+      <Footer />
     </>
   );
 }
