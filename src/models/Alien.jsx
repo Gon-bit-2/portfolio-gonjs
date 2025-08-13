@@ -8,7 +8,7 @@ Source: https://sketchfab.com/3d-models/baby-cute-alien-1f7cbacd72334158bebba227
 Title: Baby cute alien
 */
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useGraph } from "@react-three/fiber";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { SkeletonUtils } from "three-stdlib";
@@ -19,6 +19,9 @@ const Alien = (props) => {
   const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene]);
   const { nodes, materials } = useGraph(clone);
   const { actions } = useAnimations(animations, group);
+  useEffect(() => {
+    actions["Armature|ArmatureAction"].play();
+  }, []);
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Sketchfab_Scene">

@@ -4,7 +4,7 @@ import TitleHeader from "../components/TitleHeader";
 
 const Project = () => {
   return (
-    <section className="flex-center relative h-full w-full" id="project">
+    <section className="flex-center relative h-full w-full" id="projects">
       <GradientSpheres
         sphere1Class="projects-gradient-sphere projects-sphere-1"
         sphere2Class="projects-gradient-sphere projects-sphere-2"

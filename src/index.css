@@ -58,6 +58,18 @@ section {
   .flex-center {
     @apply flex items-center justify-center;
   }
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  .animate-marquee {
+    width: 200%;
+    animation: marquee 20s linear infinite;
+  }
 }
 
 @layer components {
@@ -170,7 +182,7 @@ section {
     height: 100%;
     position: absolute;
     overflow: hidden;
-    animation: marquee 60s linear infinite;
+    animation: marquee 20s linear infinite;
   }
   .marquee-item {
     float: left;

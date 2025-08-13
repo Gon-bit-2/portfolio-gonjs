@@ -16,11 +16,14 @@ const TechStack = () => {
         <div className="relative mt-10 md:mt-20">
           <div className="tech-stack-gradient-left-box absolute bottom-0 left-0 z-20 h-full w-36"></div>
           <div className="tech-stack-gradient-right-box absolute right-0 bottom-0 z-20 h-full w-36"></div>
-          <div className="marquee h-52">
-            <div className="marquee-box gap-5 md:gap-12">
-              {iconsList.map((icon, index) => {
-                return <TechIcon key={index} icon={icon} />;
-              })}
+          <div className="marquee h-52 overflow-hidden">
+            <div className="marquee-box animate-marquee flex gap-5 md:gap-12">
+              {iconsList.map((icon, index) => (
+                <TechIcon key={index} icon={icon} />
+              ))}
+              {iconsList.map((icon, index) => (
+                <TechIcon key={iconsList.length + index} icon={icon} />
+              ))}
             </div>
           </div>
         </div>
